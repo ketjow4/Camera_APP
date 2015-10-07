@@ -87,6 +87,7 @@ public class CameraActivity extends Activity {
 
 
         // Add a listener to the Capture button
+
         Button captureButton = (Button) findViewById(R.id.button_capture2);
         captureButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -99,7 +100,10 @@ public class CameraActivity extends Activity {
                             mCamera.lock();         // take camera access back from MediaRecorder
 
                             // inform the user that recording has stopped
+
                             //setCaptureButtonText("Capture");
+                            Toast toast = Toast.makeText(context, "Start recording!", duration);
+                            toast.show();
                             isRecording = false;
                         } else {
                             // initialize video camera
@@ -110,6 +114,8 @@ public class CameraActivity extends Activity {
 
                                 // inform the user that recording has started
                                 //setCaptureButtonText("Stop");
+                                Toast toast = Toast.makeText(context, "STOP recording!", duration);
+                                toast.show();
                                 isRecording = true;
                             } else {
                                 // prepare didn't work, release the camera
@@ -120,6 +126,7 @@ public class CameraActivity extends Activity {
                     }
                 }
         );
+
 
     }
 
@@ -174,7 +181,11 @@ public class CameraActivity extends Activity {
             } catch (IOException e) {
                 Log.d("ERROR", "Error accessing file: " + e.getMessage());
             }
+            imgFile = pictureFile;
             setImage();
+
+            Toast toast = Toast.makeText(context, "Photo taken !", duration);
+            toast.show();
 
             mCamera.startPreview();
         }
